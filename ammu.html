@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My AMMU ❤️</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(-45deg,#ff4e8a,#6a11cb,#ff6ec4,#7873f5);
+background-size:400% 400%;
+animation:bg 15s ease infinite;
+color:white;
+}
+
+@keyframes bg{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.card{
+width:90%;
+max-width:650px;
+padding:40px;
+border-radius:30px;
+background:rgba(255,255,255,0.12);
+backdrop-filter:blur(25px);
+box-shadow:0 0 60px rgba(255,0,150,0.6);
+text-align:center;
+position:absolute;
+transition:0.7s;
+opacity:0;
+display:none;
+}
+
+h1,h2{margin-bottom:15px;}
+
+input{
+padding:12px;
+width:75%;
+border:none;
+border-radius:25px;
+text-align:center;
+outline:none;
+}
+
+button{
+margin-top:20px;
+padding:12px 30px;
+border:none;
+border-radius:30px;
+background:white;
+color:#ff2d75;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+box-shadow:0 0 20px #fff;
+}
+
+.heart{
+position:absolute;
+bottom:-20px;
+animation:float 7s linear infinite;
+font-size:20px;
+}
+
+@keyframes float{
+0%{transform:translateY(0);opacity:0;}
+50%{opacity:1;}
+100%{transform:translateY(-110vh);opacity:0;}
+}
+
+.typing{
+font-size:18px;
+min-height:140px;
+}
+
+.burst{
+font-size:120px;
+animation:pop 1s ease forwards;
+}
+
+@keyframes pop{
+0%{transform:scale(0);}
+100%{transform:scale(1.3);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="login">
+<h2>🔐 Enter Password</h2>
+<input type="password" id="pass" placeholder="Enter Password">
+<br>
+<button onclick="check()">Unlock My Heart 💖</button>
+</div>
+
+<div class="card" id="main">
+<h1>❤️ AMMU ❤️</h1>
+<div class="typing" id="story"></div>
+<button onclick="showValentine()">Next 💘</button>
+</div>
+
+<div class="card" id="valentine">
+<h2>💘 Will You Be My Valentine? 💘</h2>
+<button onclick="yes()">YES 💖</button>
+<button onmouseover="moveNo(this)">NO 🙈</button>
+</div>
+
+<div class="card" id="final">
+<div id="bigHeart"></div>
+<h2>Forever Us 🐧🦆❤️</h2>
+<p>No distance. No end. Only us — forever ❤️</p>
+</div>
+
+<!-- Background Music -->
+<audio id="bgm" loop>
+<source src="bgm.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+function show(id){
+let el=document.getElementById(id);
+el.style.display="block";
+setTimeout(()=>el.style.opacity="1",50);
+}
+
+function hide(id){
+let el=document.getElementById(id);
+el.style.opacity="0";
+setTimeout(()=>el.style.display="none",600);
+}
+
+function check(){
+if(document.getElementById("pass").value==="210904"){
+hide("login");
+show("main");
+typeStory();
+}else{
+alert("Wrong Password 😜");
+}
+}
+
+let text=`Dear Ammu Kutty 💖🐻,
+
+You are my one and only blessing from God 🙏✨  
+My biggest gift 🎁, my safe place 🏡, my happiness 😊💫  
+
+It has been 4 beautiful years 🗓️💞 since we met,  
+but till now our love has never decreased even a little 🤍🌸  
+
+Now we are both very far from each other 🌍✈️,  
+miles apart but always heart to heart ❤️‍🔥💓  
+
+Even this distance has not reduced our love 💕  
+instead, it has made it deeper, stronger, and more meaningful 💎💖  
+
+This distance made me realize  
+how much I truly, deeply, madly love you 🥹❤️‍🔥  
+
+Even for the smallest things 🌷,  
+I keep thinking whether you would like it or not 💭💝  
+
+Only with you, I can truly be myself 🫶✨  
+No filters, no pretending — just pure me 🤍🥰  
+
+Our life is not going to stay like this forever 🌅  
+This distance is only temporary ⏳  
+
+It cannot do anything to our love 💪❤️  
+Instead, our love is growing stronger day by day 📈💞  
+
+Until now, nothing has gone wrong in our journey 🚶‍♂️🚶‍♀️❤️  
+Everything is happening for a beautiful reason 🌈✨  
+
+Love you sooooo much, Ammu 😘💋❤️‍🔥💖♾️`;
+
+function typeStory(){
+let i=0;
+let speed=40;
+document.getElementById("story").innerHTML="";
+function type(){
+if(i<text.length){
+document.getElementById("story").innerHTML+=text.charAt(i);
+i++;
+setTimeout(type,speed);
+}
+}
+type();
+}
+
+function showValentine(){
+hide("main");
+show("valentine");
+}
+
+function moveNo(btn){
+btn.style.position="absolute";
+btn.style.left=Math.random()*500+"px";
+btn.style.top=Math.random()*300+"px";
+}
+
+function yes(){
+hide("valentine");
+show("final");
+
+document.getElementById("bigHeart").innerHTML="💖";
+document.getElementById("bigHeart").className="burst";
+
+confetti();
+
+/* 🎵 PLAY MUSIC WHEN YES CLICKED */
+let music=document.getElementById("bgm");
+music.volume=0.9;
+music.play().catch(()=>{});
+}
+
+function confetti(){
+for(let i=0;i<60;i++){
+const c=document.createElement("div");
+c.style.position="absolute";
+c.style.width="8px";
+c.style.height="8px";
+c.style.background="hsl("+Math.random()*360+",100%,50%)";
+c.style.left="50%";
+c.style.top="50%";
+document.body.appendChild(c);
+
+let x=(Math.random()-0.5)*900;
+let y=(Math.random()-0.5)*700;
+
+c.animate([
+{transform:"translate(0,0)"},
+{transform:`translate(${x}px,${y}px)`}
+],{duration:1500});
+
+setTimeout(()=>c.remove(),1500);
+}
+}
+
+setInterval(()=>{
+const h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(Math.random()*25+15)+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),7000);
+},400);
+
+show("login");
+
+</script>
+
+</body>
+</html>
